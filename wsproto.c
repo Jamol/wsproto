@@ -256,6 +256,7 @@ int ws_decode(ws_ctx_t *ctx, const uint8_t *input, uint32_t input_len, uint8_t *
                 ctx->status = FRAME_PARSE_STATE_HDR1;
                 ctx->recv_len = 0;
                 ctx->recv_buf = NULL;
+                return WS_ERROR_NOERR;
             }
             else
             {
