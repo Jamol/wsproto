@@ -75,6 +75,12 @@ void ws_free(void* buf)
 
 int ws_encode(ws_frame_type_t frame_type, const uint8_t *input, uint32_t input_len, uint8_t **output, uint32_t *output_len)
 {
+    if(NULL == output || NULL == output_len) {
+        return WS_ERROR_INVALID_PARAM;
+    }
+    *output = NULL;
+    *output_len = 0;
+    
     uint8_t first_byte = 0x81;
     uint8_t second_byte = 0x00;
     uint8_t header_len = 2;
@@ -129,6 +135,12 @@ int ws_encode(ws_frame_type_t frame_type, const uint8_t *input, uint32_t input_l
 #define WS_MAX_FRAME_DATA_LENGTH	10*1024*1024
 int ws_decode(ws_ctx_t *ctx, const uint8_t *input, uint32_t input_len, uint8_t **output, uint32_t *output_len, uint32_t *handled_len)
 {
+    if(NULL == output || NULL == output_len) {
+        return WS_ERROR_INVALID_PARAM;
+    }
+    *output = NULL;
+    *output_len = 0;
+    
     uint32_t *pcur_pos = handled_len;
     *pcur_pos = 0;
     while((*pcur_pos) < input_len)
